@@ -1,0 +1,38 @@
+{
+  "name": "nblog",
+  "version": "1.0.0",
+  "description": "Another blog",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NijoElite/nblog.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NijoElite/nblog/issues"
+  },
+  "homepage": "https://github.com/NijoElite/nblog#readme",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-sass": "^4.0.2",
+    "nodemon": "^1.19.1"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-session": "^1.16.1",
+    "moment": "^2.24.0",
+    "mongoose": "^5.5.13",
+    "mongoose-unique-validator": "^2.0.3",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "pug": "^2.0.3",
+    "slug": "^1.1.0"
+  }
+}
