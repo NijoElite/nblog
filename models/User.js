@@ -20,8 +20,22 @@ const userSchema = new mongoose.Schema({
     index: true,
   },
 
-  hash: String,
-  salt: String,
+  password: {
+    type: String,
+    required: [true, 'can\'t be blank'],
+    minlength: [8, 'length must be at least 8'],
+    select: false,
+  },
+
+  favs: [{
+    type: mongoose.SchemaTypes.ObjectId,
+    ref: 'Article',
+  }],
+
+  salt: {
+    type: String,
+    select: false,
+  },
 }, {timestamps: true});
 
 userSchema.plugin(uniquireValidator, {message: 'is already taken'});
@@ -29,12 +43,19 @@ userSchema.plugin(uniquireValidator, {message: 'is already taken'});
 userSchema.methods.validatePassword = function(pass) {
   const hash = crypto.pbkdf2Sync(pass, this.salt, 10000, 512, 'sha512').
       toString();
-  return this.hash === hash;
+  return this.password === hash;
 };
 
-userSchema.methods.setPassword = function(pass) {
-  this.salt = crypto.randomBytes(16).toString('hex');
-  this.hash = crypto.pbkdf2Sync(pass, this.salt, 10000, 512, 'sha512');
-};
+userSchema.pre('save', function(next) {
+  const user = this;
+
+  if (!user.isModified('password')) return next();
+
+  user.salt = crypto.randomBytes(16).toString('hex');
+  user.password = crypto.pbkdf2Sync(user.password, user.salt,
+      10000, 512, 'sha512');
+
+  next();
+});
 
 mongoose.model('User', userSchema);
