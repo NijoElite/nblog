@@ -1,0 +1,241 @@
+{
+	"info": {
+		"_postman_id": "fba61bda-a911-453e-9197-8071e6733e44",
+		"name": "nblog",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "All Users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0e733916-8aa9-4035-b473-e595a36b4989",
+								"exec": [
+									"const schema = {",
+									"    type: 'array',",
+									"    items: {",
+									"        required: ['username'],",
+									"        properties: {",
+									"            username: {type: 'string'},",
+									"            email: {type: 'string'},",
+									"            favs: {type: 'array'},",
+									"        },",
+									"    }",
+									"};",
+									"",
+									"pm.test('Status is 200', () => {pm.response.to.have.status(200);});",
+									"pm.test('Response is JSON', () => {pm.response.to.be.json});",
+									"pm.test('JSON schema is valid', () => {pm.response.to.have.jsonSchema(schema);});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/users",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Single User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c53746cf-3c37-432f-ad37-010d53f49ff8",
+								"exec": [
+									"const schema = {",
+									"    required: ['username', 'favs', 'email'],",
+									"    properties: {",
+									"        username: {type: 'string'},",
+									"        email: {type: 'string'},",
+									"        favs: {type: 'array'},",
+									"    },",
+									"};",
+									"",
+									"pm.test('Status is 200', () => {pm.response.to.have.status(200);});",
+									"pm.test('Response is JSON', () => {pm.response.to.be.json});",
+									"pm.test('JSON schema is valid', () => {pm.response.to.have.jsonSchema(schema);});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/users/admin2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"admin2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Articles",
+			"item": [
+				{
+					"name": "All Articles",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b34fa9f2-812b-4657-b942-7346ad377dc1",
+								"exec": [
+									"const authorSchema = {",
+									"    required: ['username'],",
+									"    properties: {",
+									"        username: {type: 'string'}",
+									"    }",
+									"}",
+									"",
+									"const articleSchema = {",
+									"    type: 'array',",
+									"    items: {",
+									"        required: ['title', 'description', 'tagList', 'author', 'createdAt', 'slug'],",
+									"        properties: {",
+									"            title: {type: 'string'},",
+									"            description: {type: 'string'},",
+									"            tagList: {type: 'array'},",
+									"            author: authorSchema,",
+									"            createdAt: 'string',",
+									"            slug: {type: 'string'},",
+									"        },",
+									"    }",
+									"};",
+									"",
+									"pm.test('Status is 200', () => {pm.response.to.have.status(200);});",
+									"pm.test('Response is JSON', () => {pm.response.to.be.json});",
+									"pm.test('JSON schema is valid', () => {pm.response.to.have.jsonSchema(articleSchema);});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/articles",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"articles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Single Article",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8311c098-a69a-408c-899c-3b931c430e37",
+								"exec": [
+									"const authorSchema = {",
+									"    required: ['username'],",
+									"    properties: {",
+									"        username: {type: 'string'}",
+									"    }",
+									"}",
+									"",
+									"const articlesSchema = {",
+									"    type: 'array',",
+									"    items: {",
+									"        required: ['title', 'description', 'tagList', 'author', 'createdAt', 'slug', 'body'],",
+									"        properties: {",
+									"            title: {type: 'string'},",
+									"            description: {type: 'string'},",
+									"            tagList: {type: 'array'},",
+									"            author: authorSchema,",
+									"            createdAt: 'string',",
+									"            slug: {type: 'string'},",
+									"            body: {type: 'string'},",
+									"        },",
+									"    }",
+									"};",
+									"",
+									"pm.test('Status is 200', () => {pm.response.to.have.status(200);});",
+									"pm.test('Response is JSON', () => {pm.response.to.be.json});",
+									"pm.test('JSON schema is valid', () => {pm.response.to.have.jsonSchema(articlesSchema);});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/articles/testArticle",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"articles",
+								"testArticle"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "0d60bdbd-ec7e-4977-9161-8dc249854a22",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "5965c26c-0e06-48db-8275-8087a93cc1f6",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "4e19b89c-6b7c-43fc-8450-0d63e210a462",
+			"key": "url",
+			"value": "http://localhost:3000",
+			"type": "string"
+		}
+	]
+}

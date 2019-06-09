@@ -14,6 +14,9 @@ mongoose.connect(config.mongodb_uri);
 mongoose.set('debug', !isProduction);
 
 // Mongoose models
+require('./models/User');
+require('./models/Article');
+require('./models/Comment');
 
 // Express config
 app.set('view engine', 'pug');
@@ -34,7 +37,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Routes
-app.use(require('./routes'));
+app.use('/', require('./routes'));
 
 // Handle 404
 app.use(function(req, res, next) {
@@ -46,13 +49,12 @@ app.use(function(req, res, next) {
 
 // Error handler
 app.use(function(err, req, res, next) {
-  res.status = err.status || 500;
-
-  res.render('error', {status: err.status, message: err.message});
+  const status = err.status || 500;
+  res.status(status).json({status: err.status, message: err.message});
 });
 
 // start server
-const server = app.listen(process.env.PORT || 3500, () => {
+const server = app.listen(process.env.PORT || 3000, () => {
   console.log('Listening on port ' + server.address().port);
 });
 
