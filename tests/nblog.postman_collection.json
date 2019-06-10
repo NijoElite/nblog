@@ -121,7 +121,7 @@
 									"            description: {type: 'string'},",
 									"            tagList: {type: 'array'},",
 									"            author: authorSchema,",
-									"            createdAt: 'string',",
+									"            createdAt: {type: 'string'},",
 									"            slug: {type: 'string'},",
 									"        },",
 									"    }",
@@ -166,19 +166,16 @@
 									"}",
 									"",
 									"const articlesSchema = {",
-									"    type: 'array',",
-									"    items: {",
-									"        required: ['title', 'description', 'tagList', 'author', 'createdAt', 'slug', 'body'],",
-									"        properties: {",
-									"            title: {type: 'string'},",
-									"            description: {type: 'string'},",
-									"            tagList: {type: 'array'},",
-									"            author: authorSchema,",
-									"            createdAt: 'string',",
-									"            slug: {type: 'string'},",
-									"            body: {type: 'string'},",
-									"        },",
-									"    }",
+									"    required: ['title', 'description', 'tagList', 'author', 'createdAt', 'slug', 'body'],",
+									"    properties: {",
+									"        title: {type: 'string'},",
+									"        description: {type: 'string'},",
+									"        tagList: {type: 'array'},",
+									"        author: authorSchema,",
+									"        createdAt: {type: 'string'},",
+									"        slug: {type: 'string'},",
+									"        body: {type: 'string'},",
+									"    },",
 									"};",
 									"",
 									"pm.test('Status is 200', () => {pm.response.to.have.status(200);});",
@@ -193,13 +190,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/articles/testArticle",
+							"raw": "{{url}}/articles/testarticle-f6pguj",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"articles",
-								"testArticle"
+								"testarticle-f6pguj"
 							]
 						}
 					},
@@ -232,7 +229,7 @@
 	],
 	"variable": [
 		{
-			"id": "4e19b89c-6b7c-43fc-8450-0d63e210a462",
+			"id": "4f2d7cc8-8b62-4139-b1d6-8d0c28a13996",
 			"key": "url",
 			"value": "http://localhost:3000",
 			"type": "string"
