@@ -231,7 +231,7 @@
 		{
 			"id": "4f2d7cc8-8b62-4139-b1d6-8d0c28a13996",
 			"key": "url",
-			"value": "http://localhost:3000",
+			"value": "http://localhost:3000/api",
 			"type": "string"
 		}
 	]

@@ -36,8 +36,8 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Routes
-app.use('/', require('./routes'));
+// Api routes
+app.use('/api', require('./routes'));
 
 // Handle 404
 app.use(function(req, res, next) {
