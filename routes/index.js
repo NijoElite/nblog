@@ -1,8 +1,8 @@
 const express = require('express');
 const router = new express.Router;
 
-router.use('/users', require('./api/users'));
-router.use('/articles/', require('./api/articles'));
+router.use('/users', require('./users'));
+router.use('/articles/', require('./articles'));
 
 // Errors
 router.use(function(err, req, res, next) {
