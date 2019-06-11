@@ -1,0 +1,23 @@
+extends ../base
+
+block title 
+    | Users
+
+block links
+
+block main
+    .container
+        .row
+            .card-list.col-xs-12.col-md-7
+                .row
+                    each user in users
+                        .col-xs-12.col-md-6
+                            .card-list__card.card
+                                img.card__background(src='/img/card-bg.jpg', alt='')
+                                a.card__username(href='/users/' + username)=user.username
+                                .card__desc Lorem ipsum dolor sit amet.
+                                .row
+                                    .card__likes.col-xs-6 5 
+                                    .card__visits.col-xs-6 10                            
+
+            .right-sidebar.col-xs-12.col-md-5

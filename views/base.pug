@@ -1,0 +1,36 @@
+doctype html
+html
+    head
+        meta(charset = 'utf-8')
+        meta(name='viewport', content="initial-scale=1.0, width=device-width")
+        title
+            block title
+        link(rel='stylesheet', type='text/css', href='/css/bootstrap.min.css')
+        link(rel='stylesheet', type='text/css', href='/css/main.css')
+        block links
+    body.page
+        - const navbarElements = [{caption: 'Users', link:'/users/'}, {caption: 'Articles', link:'/articles/'}]
+      
+        header.navbar.page__navbar.clearfix
+            h1.navbar__logo.logo
+                | N-Blog
+            ul.navbar__list
+                each el in navbarElements
+                    a.navbar__item(href=el.link)= el.caption
+            form.search-form.navbar__search-form
+                input.search-form__input(type='text', placeholder='Type of search')
+                input.search-form__button(type='submit' value='🔍')
+
+        - const imgSrc = placeholderSrc ? placeholderSrc : '/img/background.jpg'
+        div.img-placeholder
+            img.img-placeholder__image(src=imgSrc, alt='')
+
+        main.main.page__main
+            block main
+
+        footer.footer.page__footer
+            | It is footer
+
+
+        block scripts
+    
