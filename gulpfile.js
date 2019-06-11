@@ -5,11 +5,13 @@ const concat = require('gulp-concat');
 const paths = {
   src: {
     js: 'src/js/**/*.js',
-    sass: 'src/sass/**/*.sass',
+    sass: 'src/sass/**/*.*',
+    img: 'src/img/**/*.*',
   },
   out: {
     css: 'public/css',
     js: 'public/js',
+    img: 'public/img',
   },
 };
 
@@ -25,8 +27,13 @@ gulp.task('js', function() {
       pipe(gulp.dest(paths.out.js));
 });
 
-gulp.task('build', gulp.series(['sass', 'js']));
+gulp.task('img', function() {
+  return gulp.src(paths.src.img).
+      pipe(gulp.dest(paths.out.img));
+});
+
+gulp.task('build', gulp.series(['sass', 'js', 'img']));
 
 gulp.task('watch', function() {
-  gulp.watch([paths.src.sass, paths.src.js], gulp.series('build'));
+  gulp.watch([paths.src.sass, paths.src.js, paths.src.img], gulp.series('build'));
 });
