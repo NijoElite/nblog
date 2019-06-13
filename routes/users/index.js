@@ -8,7 +8,7 @@ router.param('username', function(req, res, next, username) {
   User.findOne({username: username})
       .then((user) => {
         if (!user) {
-          return res.status(404).json({error: {
+          return res.status(404).render('error', {error: {
             username: 'User Not Found',
           }});
         }
@@ -23,7 +23,7 @@ router.param('username', function(req, res, next, username) {
 // User List
 router.get('/', function(req, res, next) {
   User.find({})
-      .then((users) => res.json(users))
+      .then((users) => res.status(200).render('users/userList', {users: users}))
       .catch((err) => next(err));
 });
 
@@ -46,7 +46,7 @@ router.post('/', function(req, res, next) {
 
 // User Page
 router.get('/:username', function(req, res, next) {
-  res.status(200).json(req.paramUser);
+  res.status(200).render('users/userPage', req.paramUser);
 });
 
 // Delete User
