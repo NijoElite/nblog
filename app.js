@@ -9,9 +9,22 @@ const app = express();
 
 const isProduction = process.env.NODE_ENV === 'production';
 
-// / Connect to DB
-mongoose.connect(config.mongodb_uri);
+// Connect to DB
 mongoose.set('debug', !isProduction);
+
+mongoose.connect(config.mongodb_uri, {useNewUrlParser: true})
+    .then(() => {
+      console.log(moment().format() +
+      ' [mongoose] connection established to '
+      + config.mongodb_uri);
+    })
+    .catch((err) => {
+      console.error(moment().format() +
+      ' [mongoose] connection error '
+      + err);
+      process.exit(1);
+    });
+
 
 // Mongoose models
 require('./models/User');
