@@ -46,7 +46,11 @@ router.post('/', function(req, res, next) {
 
 // User Page
 router.get('/:username', function(req, res, next) {
-  res.status(200).render('users/userPage', req.paramUser);
+  if (req.xhr) {
+    res.json(req.paramUser);
+  } else {
+    res.status(200).render('users/userPage', req.paramUser);
+  }
 });
 
 // Delete User
