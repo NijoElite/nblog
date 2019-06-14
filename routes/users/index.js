@@ -23,8 +23,14 @@ router.param('username', function(req, res, next, username) {
 // User List
 router.get('/', function(req, res, next) {
   User.find({})
-      .then((users) => res.status(200).render('users/userList', {users: users}))
-      .catch((err) => next(err));
+      .then((users) => {
+        console.error('wtf');
+        res.status(200).render('users/userList', {users: users});
+        console.error('wtf')})
+      .catch((err) => {
+        console.error('wtf');next(err)
+        console.error('wtf'); 
+      });
 });
 
 // New User
