@@ -27,6 +27,16 @@ const userSchema = new mongoose.Schema({
     select: false,
   },
 
+  description: {
+    type: String,
+    default: 'The user did not have enough imagination to tell about himself.',
+  },
+
+  bio: {
+    type: String,
+    default: 'Apparently, the user has no significant achievements in life.',
+  },
+
   favs: [{
     type: mongoose.SchemaTypes.ObjectId,
     ref: 'Article',
