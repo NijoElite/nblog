@@ -8,9 +8,9 @@ router.param('username', function(req, res, next, username) {
   User.findOne({username: username})
       .then((user) => {
         if (!user) {
-          return res.status(404).render('error', {error: {
-            username: 'User Not Found',
-          }});
+          const err = new Error('Not Found');
+          err.status = 404;
+          return next(err);
         }
 
         req.paramUser = user;

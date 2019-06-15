@@ -56,14 +56,25 @@ app.use('/', require('./routes'));
 app.use(function(req, res, next) {
   const err = new Error('Not Found');
   err.status = 404;
-  err.message = 'Page doesn\'t exist';
+  err.message = 'Page Not Found';
   next(err);
 });
 
 // Error handler
 app.use(function(err, req, res, next) {
-  const status = err.status || 500;
-  res.status(status).json({status: err.status, message: err.message});
+  if (!err.status) {
+    err.status = 500;
+    err.message = 'Something Gone Wrong';
+  }
+
+  const errObj = {error: {status: err.status, message: err.message}};
+  res.status(err.status);
+
+  if (req.xhr) {
+    return res.jsonerrObj(errObj);
+  }
+
+  res.render('error', errObj);
 });
 
 // start server
