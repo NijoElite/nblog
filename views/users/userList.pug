@@ -15,7 +15,8 @@ block main
                             .card-list__card.card
                                 img.card__background(src='/img/card-bg.jpg', alt='')
                                 .card__username(onclick=`loadUserInfoToSidebar('${user.username}')`)=user.username
-                                .card__desc=user.description
+                                .card__desc
+                                    .card__desc-text=user.description
                                 .container-fluid
                                     .row
                                         .card__likes.card__lower-section.col-xs-6=user.favs.length
