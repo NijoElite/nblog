@@ -51,9 +51,16 @@ const userSchema = new mongoose.Schema({
 userSchema.plugin(uniquireValidator, {message: 'is already taken'});
 
 userSchema.methods.validatePassword = function(pass) {
-  const hash = crypto.pbkdf2Sync(pass, this.salt, 10000, 512, 'sha512').
-      toString();
-  return this.password === hash;
+  const User = mongoose.model('User');
+  const promise = new Promise((resolve, reject) => {
+    User.findById(this._id.toString()).select('password salt').then((user) =>{
+      const hash = crypto.pbkdf2Sync(pass, user.salt, 10000, 512, 'sha512').
+          toString();
+      resolve(user.password === hash);
+    }).catch((err) => reject(err));
+  });
+
+  return promise;
 };
 
 userSchema.pre('save', function(next) {
