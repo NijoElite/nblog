@@ -4,7 +4,8 @@ block title
     | Login
 
 block main
-    form(action="/login" method="POST")
-        input(type="text", name="username", placeholder="Username")
-        input(type="password", name="password", placeholder="Password")  
-        input(type="submit", value="Register")
+    form(action="/login" method="POST").card.card-login
+        .card-login__caption Login
+        input(type="text", name="username", placeholder="Username").card-login__input
+        input(type="password", name="password", placeholder="Password").card-login__input
+        input(type="submit", value="Login").card-login__input.card-login__input_btn
