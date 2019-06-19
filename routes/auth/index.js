@@ -33,12 +33,12 @@ passport.use(new LocalStrategy(
     }
 ));
 
-// router.use('/', (req, res, next) => {
-//   if (req.isAuthenticated) {
-//     return res.redirect('/');
-//   }
-//   next();
-// });
+router.use('/', (req, res, next) => {
+  if (req.isAuthenticated()) {
+    return res.redirect('/');
+  }
+  next();
+});
 
 router.get('/', (req, res, next) => {
   res.render('auth/login');
@@ -48,6 +48,11 @@ router.post('/', passport.authenticate('local', {
   successRedirect: '/users',
   failureRedirect: '/login',
 }));
+
+router.get('/logout', (req, res, next) => {
+  req.logout();
+  res.redirect('/');
+});
 
 
 module.exports = router;
