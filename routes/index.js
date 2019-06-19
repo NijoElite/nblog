@@ -1,8 +1,14 @@
 const express = require('express');
 const router = new express.Router;
 
+router.use('/', (req, res, next) => {
+  res.locals.user = req.user;
+  next();
+});
+
 router.use('/users', require('./users'));
 router.use('/articles/', require('./articles'));
+router.use('/login', require('./auth'));
 
 // Errors
 router.use(function(err, req, res, next) {
@@ -16,5 +22,6 @@ router.use(function(err, req, res, next) {
   }
   next(err);
 });
+
 
 module.exports = router;

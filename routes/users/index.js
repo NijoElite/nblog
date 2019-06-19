@@ -22,6 +22,7 @@ router.param('username', function(req, res, next, username) {
 
 // User List
 router.get('/', function(req, res, next) {
+  console.error(req.user);
   User.find({})
       .then((users) => res.status(200).render('users/userList', {users: users}))
       .catch((err) => next(err));
